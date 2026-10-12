@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --paper: #faf8f5;
+  --surface: #ffffff;
+  --surface-2: #f3f0eb;
+  --ink: #16161d;
+  --muted: #6b6a73;
+  --line: #ebe7e1;
+  --up: #12a150;
+  --down: #e5484d;
+  --accent: #7c3aed;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #0e0e12;
+  --surface: #18181f;
+  --surface-2: #22222b;
+  --ink: #f2f1ee;
+  --muted: #9c9aa6;
+  --line: #2a2a34;
+  --up: #3dd68c;
+  --down: #ff6369;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-up: var(--up);
+  --color-down: var(--down);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Highlighter effect for **key phrases** */
+.hl {
+  font-weight: 700;
+  background-image: linear-gradient(
+    transparent 58%,
+    color-mix(in oklab, var(--accent) 28%, transparent) 58%,
+    color-mix(in oklab, var(--accent) 28%, transparent) 92%,
+    transparent 92%
+  );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.dark .hl {
+  background-image: linear-gradient(
+    transparent 58%,
+    color-mix(in oklab, var(--accent) 45%, transparent) 58%,
+    color-mix(in oklab, var(--accent) 45%, transparent) 92%,
+    transparent 92%
+  );
+}
+.on-dark .hl {
+  color: #fff;
+  background-image: linear-gradient(transparent 60%, color-mix(in oklab, var(--accent) 70%, transparent) 60%);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.mood-wild {
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .mood-wild { animation: none; }
+}
